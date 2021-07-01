@@ -22,10 +22,14 @@
       document.getElementById('gifSearch').addEventListener('click', event => {
         event.preventDefault()
         axios.get('/api/gifs')
-          .then(({data: gif}) => {
-            document.getElementById('gifs').innerHTML += `
-            <img src="${gif[0].url}" alt="gif" />
-          `
+          .then(({data: gifs}) => {
+            // filter gifs by user input
+            gifs = gifs.filter(gif => gif.name === document.getElementById('search').value)
+            gifs.forEach(gif => {
+              document.getElementById('gifs').innerHTML = `
+                <img src="${gif.url}" alt="${document.getElementById('search').value}" />
+              `
+            })
           })
           .catch(err => console.error(err))
       })
