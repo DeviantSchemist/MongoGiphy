@@ -25,9 +25,25 @@
           .then(({data: gifs}) => {
             // filter gifs by user input
             gifs = gifs.filter(gif => gif.name === document.getElementById('search').value)
+            //console.log(gifs)
             gifs.forEach(gif => {
-              document.getElementById('gifs').innerHTML = `
-                <img src="${gif.url}" alt="${document.getElementById('search').value}" />
+              document.getElementById('gifs').innerHTML += `
+                <div class="row">
+                  <div class="col s12 m7">
+                    <div class="card">
+                      <div class="card-image">
+                        <img src="${gif.url}" alt="${document.getElementById('search').value}">
+                        <span class="card-title">Card Title</span>
+                      </div>
+                      <div class="card-content">
+                        <p>This is a ${gif.name} gif.</p>
+                      </div>
+                      <div class="card-action">
+                        <a href="#">This is a link</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               `
             })
           })
