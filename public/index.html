@@ -18,6 +18,17 @@
     <div id="gifs"></div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="../js/index.js"></script>
+    <script>
+      document.getElementById('gifSearch').addEventListener('click', event => {
+        event.preventDefault()
+        axios.get('/api/gifs')
+          .then(({data: gif}) => {
+            document.getElementById('gifs').innerHTML += `
+            <img src="${gif[0].url}" alt="gif" />
+          `
+          })
+          .catch(err => console.error(err))
+      })
+    </script>
   </body>
 </html>
